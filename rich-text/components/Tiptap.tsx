@@ -35,7 +35,7 @@ export default function Tiptap({
     })
 
     return (
-        <div className='flex flex-col justify-stretch min-h-[250px]'>
+        <div className='flex flex-col justify-stretch min-h-[200px]'>
             <Toolbar editor={editor} />
             <EditorContent editor={editor} />
         </div>

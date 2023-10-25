@@ -1,11 +1,14 @@
 "use client"
 
+import Nav from '@/components/Nav'
+
 import {
     Form,
     FormControl,
     FormField,
     FormItem,
     FormLabel,
+    FormMessage,
 } from '@/components/ui/form'
 
 import React from 'react'
@@ -21,8 +24,8 @@ import Tiptap from '@/components/Tiptap'
 export default function Home() {
 
     const formSchema = z.object({
-        title: z.string().min(5, { message: '제목이 너무 길지 않음' }),
-        description: z.string().min(5, { message: 'Hey the title is not long enough' }),
+        title: z.string().min(5, { message: '다섯자 이상 입력해 주세요 ~' }),
+        description: z.string().min(5, { message: '길게 입력해 주세요 ~' }),
     })
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -36,13 +39,27 @@ export default function Home() {
     })
 
     function onSubmit(values: z.infer<typeof formSchema>) {
-        
+        console.log(values)
     }
 
     return (
-        <main className='p-24'>
+        <main className='flex p-20 flex-col gap-8'>
+            <Nav />
+
+            <section>
+                <h1 className="text-4xl font-bold">Shadcn UI</h1>
+                <p className="text-2xl text-muted-foreground">공유 UI 컴포넌트</p>
+            </section>
+
+            <div className="flex gap-6 py-6">
+                <Button variant={'secondary'}>더 알아보기</Button>
+                <Button>지금 등록</Button>
+            </div>
+
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
+                <form 
+                    onSubmit={form.handleSubmit(onSubmit)}
+                >
                     <FormField
                         control={form.control}
                         name='title'
@@ -52,6 +69,7 @@ export default function Home() {
                                 <FormControl>
                                     <Input placeholder='제목' {...field }></Input>
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
                     />
@@ -64,10 +82,13 @@ export default function Home() {
                                 <FormControl>
                                     <Tiptap description={field.name} onChange={field.onChange} />
                                 </FormControl>
+                                <FormMessage />
                             </FormItem>
                         )}
-                    />                   
-                    <Button className="my-1" type="submit">보내기</Button>
+                    />       
+                    <div className="mt-4">        
+                        <Button type="submit">보내기</Button>
+                    </div>    
                 </form>
             </Form>
         </main>
