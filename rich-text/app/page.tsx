@@ -43,9 +43,9 @@ export default function Home() {
     }
 
     return (
+        <>
+        <Nav />
         <main className='flex p-20 flex-col gap-8'>
-            <Nav />
-
             <section>
                 <h1 className="text-4xl font-bold">Shadcn UI</h1>
                 <p className="text-2xl text-muted-foreground">공유 UI 컴포넌트</p>
@@ -92,5 +92,6 @@ export default function Home() {
                 </form>
             </Form>
         </main>
+        </>
     ) 
 }
